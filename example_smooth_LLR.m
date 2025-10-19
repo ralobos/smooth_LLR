@@ -63,4 +63,5 @@ axis off;
 title('Undersampled data - all frames');
 
 %% Creation of the forward operator, its adjoint, and the composition of both (A, Ah, AhA)
+A = 2;
 
