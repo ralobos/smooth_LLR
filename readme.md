@@ -8,7 +8,7 @@ This MATLAB software reproduces the reconstruction experiments presented in [1].
 
 ### Main Scripts
 - **`example_smooth_LLR.m`** - Main reconstruction script for dynamic MRI undersampled data
-- **`example_smooth_LLR_fast_step_size.m`** - Reconstruction using heuristic fast step-size selection strategy
+- **`example_smooth_LLR_fast_step_size.m`** - Reconstruction using a heuristic fast step-size selection strategy
 
 
 ## References
