@@ -1,4 +1,25 @@
 function [grad_fn, cost_fn, cost_dc, cost_reg, cost_lambda_reg] = grad_LLR(Xin, N1, N2, Nt, patch_size, lambda, kdata, patches_operator, patches_adj_operator, A_operator, Ah_operator, AhA_operator, f_pot, f_dot_pot)
+% Compute gradient and cost for local low-rank regularized reconstruction
+%
+% Input:
+%   Xin                  - Vectorized image [N1*N2*Nt x 1]
+%   N1, N2, Nt          - Image dimensions and time frames
+%   patch_size          - Size of local patches
+%   lambda              - Regularization parameter
+%   kdata               - k-space data
+%   patches_operator    - Forward patch operator
+%   patches_adj_operator- Adjoint patch operator
+%   A_operator, Ah_operator, AhA_operator - Forward, adjoint, and composition operators
+%   f_pot, f_dot_pot    - Potential function and its derivative
+%
+% Output:
+%   grad_fn             - Total gradient (data consistency + regularization)
+%   cost_fn             - Total cost function value
+%   cost_dc             - Data consistency cost
+%   cost_reg            - Regularization cost
+%   cost_lambda_reg     - Weighted regularization cost
+%
+% Rodrigo A. Lobos, October 2025
 
 X = reshape(Xin, [N1, N2, Nt]);
 

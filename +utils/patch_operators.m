@@ -1,5 +1,17 @@
 function [P, Ph] = patch_operators(im_dims, patch_size)
-
+% Create forward and adjoint patch extraction operators
+%
+% Input:
+%   im_dims    - Image dimensions [N1, N2, Nt]
+%   patch_size - Size of square patches to extract
+%
+% Output:
+%   P  - Forward operator: extracts patches from image
+%   Ph - Adjoint operator: reconstructs image from patches
+%
+% Note: Assumes image dimensions are divisible by patch_size
+%
+% Rodrigo A. Lobos, October 2025
 
 N1 = im_dims(1);
 N2 = im_dims(2);

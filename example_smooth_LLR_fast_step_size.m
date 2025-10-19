@@ -5,16 +5,20 @@
 % "Smooth optimization using global and local low-rank regularizers"
 %
 % Authors: Rodrigo A. Lobos, Javier Salazar Cavazos, 
-%          Raj Rao Nadakudity, and Jeffrey A. Fessler
+%          Raj Rao Nadakuditi, and Jeffrey A. Fessler
 %
 % Description:
 %   Performs reconstruction of retrospectively undersampled k-space data 
 %   using a smooth local low-rank regularizer. The optimization problem 
 %   is solved using nonlinear conjugate gradient method.
+%   
+%   In this case the step-size for the descending step is calculated using
+%   the fast heuristic approach described in the paper.
 %
 % Version: 1.0
 % Author:  Rodrigo A. Lobos (rlobos@umich.edu)
 % Date:    October 2025
+
 
 clear all;
 close all;
@@ -104,14 +108,15 @@ f_cost_grad = @(x) utils.grad_LLR(x, N1, N2, Nt, ...
                              P, Ph, A, Ah, AhA, ...
                              f_pot, f_dot_pot);
 
-%% Huber quadratic majorizer parameters
+%% Huber quadratic majorizer parameters using the heuristic fast approach
 % This is used to compute the step-size in each iteration of the NCG method
+
 
 f_weight_pot = @(x) 1./sqrt(x.^2 + delta^2); % Weight function for the majorizer
 
 step_basis = 0; % Initial step size for the majorizer
 niter_maj = 1;  % Number of majorizer iterations
-f_maj = @(X, D, step_basis, niter_maj) utils.Huber_quadratic_majorizer(X, D, ...
+f_maj = @(X, D, step_basis, niter_maj) utils.Huber_quadratic_majorizer_fast(X, D, ...
                                                 step_basis, niter_maj, ...
                                                 N1, N2, Nt, ...
                                                 patch_size, ...

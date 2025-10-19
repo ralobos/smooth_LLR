@@ -1,22 +1,29 @@
-function [c0_t, c1_t, c2_t, c0_dc, c1_dc, c2_dc, c0_reg, c1_reg, c2_reg,  step_out_for_maj] = Huber_quadratic_majorizer(Xin, Pin, step_basis, niter_maj, N1, N2, Nt, patch_size, patches_operator, A, kdata, beta, f_pot, f_dot_pot, f_weight_pot)
-
-% Function to calculate the coefficients for the quadratic majorizer
-% directlly o rectangular matrices.
-
-% Output: 
-
-    % c0_t, c1_t, c2_t: Coefficients of the quadratic majorizer
-    
-    % q(step) = c0_t + c1_t * (step - step_ini) + c2_t * (step - step_ini)^2
-    
-    % Please note that I'm absoriving the 1/2 factor of the quadratic term
-    % into c2_t
-
-    % c0_dc, c1_dc, c2_dc: Coefficients of the quadratic majorizer of the
-    % data-consistency term
-
-    % c0_reg, c1_reg, c2_reg: Coefficients of the quadratic majorizer of the
-    % regularizer term
+function [c0_t, c1_t, c2_t, c0_dc, c1_dc, c2_dc, c0_reg, c1_reg, c2_reg, step_out_for_maj] = Huber_quadratic_majorizer(Xin, Pin, step_basis, niter_maj, N1, N2, Nt, patch_size, patches_operator, A, kdata, beta, f_pot, f_dot_pot, f_weight_pot)
+% Compute quadratic majorizer coefficients for Huber-based optimization
+%
+% Input:
+%   Xin                 - Vectorized current image estimate
+%   Pin                 - Vectorized search direction
+%   step_basis          - Initial step size
+%   niter_maj           - Number of majorizer iterations
+%   N1, N2, Nt         - Image dimensions and time frames
+%   patch_size          - Size of local patches
+%   patches_operator    - Patch extraction operator
+%   A                   - Forward operator
+%   kdata               - k-space data
+%   beta                - Regularization parameter
+%   f_pot, f_dot_pot    - Potential function and derivative
+%   f_weight_pot        - Weight function of the potential function
+%
+% Output:
+%   c0_t, c1_t, c2_t    - Total quadratic coefficients: q(step) = c0_t + c1_t*(step-step_ini) + c2_t*(step-step_ini)^2
+%   c0_dc, c1_dc, c2_dc - Data consistency term coefficients
+%   c0_reg, c1_reg, c2_reg - Regularization term coefficients  
+%   step_out_for_maj    - Output step size from majorizer
+%
+% Note: The 1/2 factor is absorbed into c2_t coefficient
+%
+% Rodrigo A. Lobos, October 2025
 
 
 X = reshape(Xin, [N1, N2, Nt]);
