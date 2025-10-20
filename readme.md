@@ -1,8 +1,13 @@
 # Smooth Local Low-Rank (LLR) Reconstruction Software v1.0
 
+https://github.com/ralobos/smooth_LLR
+
 ## Overview
 
-This MATLAB software reproduces the reconstruction experiments presented in [1]. It performs reconstruction of retrospectively undersampled dynamic MRI k-space data using a **smooth Huber-based local low-rank regularizer**. The key innovation is the use of smooth regularizers that enable standard optimization algorithms (such as nonlinear conjugate gradient) to solve the inverse problem efficiently.
+This MATLAB software reproduces the reconstruction experiments presented in [1].
+It performs reconstruction of retrospectively undersampled dynamic MRI k-space data using a **smooth Huber-based local low-rank regularizer**.
+The key innovation is the use of smooth regularizers that enable standard optimization algorithms
+(such as nonlinear conjugate gradient) to solve the inverse problem efficiently.
 
 ## Contents
 
@@ -15,6 +20,7 @@ This MATLAB software reproduces the reconstruction experiments presented in [1].
 
 **[1]** R. A. Lobos, J. Salazar Cavazos, R. R. Nadakuditi, J. A. Fessler.  
 *Smooth optimization algorithms for global and locally low-rank regularizers*  
-arXiv:2505.06073, May 2025.
+[arXiv:2505.06073](https://arxiv.org/abs/2505.06073),
+May 2025.
 
 
